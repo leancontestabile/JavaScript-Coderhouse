@@ -34,7 +34,7 @@ do {
             mostrarRedondeado(convertirPesos(montoPesos, valorDolar));
             break;
         case 2:
-            mostrarRedondeado(convertirPesos(montoPesos, valorDolar));
+            mostrarRedondeado(convertirPesos(montoPesos, valorEuro));
             break;
         case 3:
             mostrarRedondeado(convertirPesos(montoPesos, valorReal));
