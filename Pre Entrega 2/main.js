@@ -17,11 +17,12 @@ class Usuarios {
         }
         return estado;
     }
-    enviarDinero(usuario, cantidad) {
+    enviarDinero(usuarioDestino, cantidad) {
         let estado;
-        if ((buscar(usuario)) && (cantidad < this.dinero)) {
+        let usuarioEncontrado = usuarios.find(u => u.usuario === usuarioDestino);
+        if (usuarioEncontrado && cantidad <= this.dinero) {
             this.dinero -= cantidad;
-            usuario.dinero += cantidad;
+            usuarioEncontrado.dinero += cantidad;
             estado = 1;
         } else {
             estado = 0;
@@ -37,10 +38,12 @@ usuarios.push(usuarioPrueba);
 function registrar(usuario, contrasena) {
     let estado;
     if (buscar(usuario)) {
+        console.log("El usuario ya existe.");
         estado = 0;
     } else {
         let nuevoUsuario = new Usuarios(usuario, contrasena);
         usuarios.push(nuevoUsuario);
+        console.log("Usuario registrado:", nuevoUsuario);
         estado = 1;
     }
 }
@@ -82,17 +85,21 @@ botonDarkmode.addEventListener("click", () => {
     }
 });
 
+const h2InicioSesion = document.getElementById("inicioSesion");
 const loginForm = document.getElementById("loginForm");
+const registroForm = document.getElementById("registroForm");
+const botonRegistrarse = document.getElementById("botonRegistrarse");
+const botonCerrarSesion = document.getElementById("botonCerrarSesion");
 
-loginForm.addEventListener("submit", function(event) {
+loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
     const usuario = document.getElementById("usuarioInput").value;
     const contrasena = document.getElementById("contrasenaInput").value;
-    const h2InicioSesion = document.getElementById("inicioSesion");
-    const botonRegistrarse = document.getElementById("botonDerecho");
     if (iniciarSesion(usuario, contrasena)) {
-        loginForm.remove();
+        loginForm.style.display = "none";
         h2InicioSesion.textContent = `Bienvenido, ${usuario}`;
-        botonRegistrarse.textContent = "Cerrar Sesion";
+        botonRegistrarse.classList.add("d-none"); // Ocultar el botón "Registrarse"
+        botonCerrarSesion.classList.remove("d-none"); // Mostrar el botón "Cerrar Sesión"
         console.log("Inicio de sesión exitoso");
     } else {
         console.log("Usuario y/o contraseña incorrectos");
@@ -103,3 +110,20 @@ function iniciarSesion(usuario, contrasena) {
     let usuarioEncontrado = usuarios.find(u => u.usuario === usuario && u.contrasena === contrasena);
     return usuarioEncontrado !== undefined;
 }
+
+botonRegistrarse.addEventListener("click", () => {
+    loginForm.style.display = "none";
+    registroForm.classList.remove("d-none");
+    h2InicioSesion.textContent = "Registrarse";
+    botonRegistrarse.classList.remove("d-none"); // Muestra el botón "Registrarse"
+    botonCerrarSesion.classList.add("d-none"); // Oculta el botón "Cerrar Sesión"
+});
+
+botonCerrarSesion.addEventListener("click", () => {
+    loginForm.style.display = "block"; // Muestra el formulario de inicio de sesión
+    h2InicioSesion.textContent = "Iniciar Sesión";
+    botonCerrarSesion.classList.add("d-none"); // Oculta el botón "Cerrar Sesión"
+    botonRegistrarse.classList.remove("d-none"); // Muestra el botón "Registrarse"
+    document.getElementById("usuarioInput").value = "";
+    document.getElementById("contrasenaInput").value = "";
+});

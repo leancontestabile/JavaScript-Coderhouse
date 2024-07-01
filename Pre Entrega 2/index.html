@@ -14,7 +14,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">CODERBANK</a>
-      <button id="botonDerecho" class="btn btn-outline-light ms-auto" type="button">Registrarse</button>
+      <button id="botonRegistrarse" class="btn btn-outline-light ms-auto" type="button">Registrarse</button>
+      <button id="botonCerrarSesion" class="btn btn-outline-light ms-auto d-none" type="button">Cerrar Sesión</button>
     </div>
   </nav>
 
@@ -30,6 +31,16 @@
           placeholder="Ingrese su contraseña" required>
       </div>
       <button type="submit" class="btn btn-dark">Ingresar</button>
+    </form>
+
+    <form id="registroForm" class="d-none">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="nuevoUsuarioInput" name="nuevoUsuario" placeholder="Ingrese un nuevo usuario" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" id="nuevaContrasenaInput" name="nuevaContrasena" placeholder="Ingrese una nueva contraseña" required>
+        </div>
+        <button type="submit" class="btn btn-dark">Registrarse</button>
     </form>
   </div>
 
