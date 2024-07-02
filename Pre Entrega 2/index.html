@@ -23,25 +23,38 @@
     <h2 id="inicioSesion">Iniciar Sesión</h2>
     <form id="loginForm">
       <div class="mb-3">
-        <input type="text" class="form-control" id="usuarioInput" name="usuario" placeholder="Ingrese su usuario"
-          required>
+        <input type="text" class="form-control" id="usuarioInput" placeholder="Ingrese su usuario" required>
       </div>
       <div class="mb-3">
-        <input type="password" class="form-control" id="contrasenaInput" name="contrasena"
-          placeholder="Ingrese su contraseña" required>
+        <input type="password" class="form-control" id="contrasenaInput" placeholder="Ingrese su contraseña" required>
       </div>
       <button type="submit" class="btn btn-dark">Ingresar</button>
     </form>
 
     <form id="registroForm" class="d-none">
-        <div class="mb-3">
-            <input type="text" class="form-control" id="nuevoUsuarioInput" name="nuevoUsuario" placeholder="Ingrese un nuevo usuario" required>
-        </div>
-        <div class="mb-3">
-            <input type="password" class="form-control" id="nuevaContrasenaInput" name="nuevaContrasena" placeholder="Ingrese una nueva contraseña" required>
-        </div>
-        <button type="submit" class="btn btn-dark">Registrarse</button>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="nuevoUsuarioInput" placeholder="Ingrese un nuevo usuario" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" id="nuevaContrasenaInput" placeholder="Ingrese una nueva contraseña"
+          required>
+      </div>
+      <button type="submit" class="btn btn-dark">Registrarse</button>
     </form>
+  </div>
+
+  <div id="principal" class="container mt-5 text-center d-none">
+    <h5 id="dinero">000</h5>
+    <form id="miFormulario">
+      <div class="mb-3">
+        <input type="text" class="form-control" id="dineroModificar" placeholder="Ingrese un monto" required>
+      </div>
+      <button type="button" class="btn btn-dark" id="botonIngresarDinero">Ingresar dinero</button>
+      <button type="button" class="btn btn-dark" id="botonRetirarDinero">Retirar dinero</button>
+      <button type="button" class="btn btn-dark" id="botonEnviarDinero">Enviar dinero</button>
+    </form>
+  </div>
+
   </div>
 
   <button id="darkmode" class="btn btn-dark btn-sm position-fixed bottom-0 end-0 m-3" type="button">Modo Oscuro</button>
