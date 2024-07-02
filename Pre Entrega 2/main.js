@@ -177,6 +177,7 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
     const usuarioIngresado = obtener(usuario);
     const usuarioDestino = document.getElementById("destinatarioDinero").value;
     const cantidad = parseInt(document.getElementById('dineroModificar').value);
+    
 
     if (usuarioIngresado && usuarioDestino && cantidad > 0 && !isNaN(cantidad) && cantidad <= usuarioIngresado.dinero) {
         if (usuarioIngresado.enviarDinero(usuarioDestino, cantidad, usuarios)) {
@@ -184,8 +185,10 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
             document.getElementById("dineroModificar").value = "";
             document.getElementById("destinatarioDinero").value = "";
         }
+        else{
+            alert("Error, revise el monto y destinatario");
+        }
     } else {
         alert("Error, revise el monto y destinatario");
     }
 });
-
