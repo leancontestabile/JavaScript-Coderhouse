@@ -15,7 +15,6 @@ class Usuarios {
         } else {
             estado = false;
         }
-        console.log(estado)
         return estado;
     }
     enviarDinero(usuarioDestino, cantidad, usuariosRegistrados) {
@@ -40,12 +39,10 @@ usuarios.push(usuarioPrueba);
 function registrar(usuario, contrasena) {
     let estado;
     if (buscar(usuario)) {
-        console.log("El usuario ya existe.");
         estado = false;
     } else {
         let nuevoUsuario = new Usuarios(usuario, contrasena);
         usuarios.push(nuevoUsuario);
-        console.log("Usuario registrado:", nuevoUsuario);
         estado = true;
     }
     return estado;
@@ -115,9 +112,8 @@ loginForm.addEventListener("submit", function (event) {
         interfazPrincipal.classList.remove("d-none");
         botonRegistrarse.classList.add("d-none");
         botonCerrarSesion.classList.remove("d-none");
-        console.log("Inicio de sesión exitoso");
     } else {
-        console.log("Usuario y/o contraseña incorrectos");
+        alert("Usuario y/o contraseña incorrectos");
     }
 });
 
@@ -129,11 +125,10 @@ registroForm.addEventListener("submit", function (event) {
         registroForm.classList.add("d-none");
         h2InicioSesion.textContent = "Iniciar Sesión";
         loginForm.style.display = "block";
-        console.log("Registro exitoso");
+        alert("Registro exitoso");
     } else {
-        console.log("Registro invalido");
+        alert("Registro invalido, ingrese otro nombre de usuario");
     }
-
 });
 
 botonRegistrarse.addEventListener("click", () => {
@@ -167,9 +162,14 @@ document.getElementById('botonRetirarDinero').addEventListener('click', function
     const usuario = document.getElementById("usuarioInput").value;
     let usuarioIngresado = obtener(usuario);
     let dineroIngresado = document.getElementById('dineroModificar').value;
-    usuarioIngresado.retirarDinero(dineroIngresado);
-    const dineroUsuario = document.getElementById("dinero");
-    dineroUsuario.textContent = `$${usuarioIngresado.dinero}`;
+    if (usuarioIngresado.retirarDinero(dineroIngresado)) {
+        const dineroUsuario = document.getElementById("dinero");
+        dineroUsuario.textContent = `$${usuarioIngresado.dinero}`;
+    } else {
+        alert("No se pudo retirar dinero");
+    }
+
+
 });
 
 document.getElementById('botonEnviarDinero').addEventListener('click', function () {
@@ -180,16 +180,12 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
 
     if (usuarioIngresado && usuarioDestino && cantidad > 0 && !isNaN(cantidad) && cantidad <= usuarioIngresado.dinero) {
         if (usuarioIngresado.enviarDinero(usuarioDestino, cantidad, usuarios)) {
-            console.log("Transferencia exitosa");
             document.getElementById("dinero").textContent = `$${usuarioIngresado.dinero}`;
             document.getElementById("dineroModificar").value = "";
             document.getElementById("destinatarioDinero").value = "";
-        } else {
-            console.log("Error al enviar dinero");
         }
     } else {
-        console.log("No se puede realizar la transferencia.");
+        alert("Error, revise el monto y destinatario");
     }
-    console.log(usuarios)
 });
 
