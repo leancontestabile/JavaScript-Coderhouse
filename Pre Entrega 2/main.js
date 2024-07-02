@@ -18,12 +18,12 @@ class Usuarios {
         console.log(estado)
         return estado;
     }
-    enviarDinero(usuarioDestino, cantidad) {
-        let estado;
-        let usuarioEncontrado = usuarios.find(u => u.usuario === usuarioDestino);
-        if (usuarioEncontrado && cantidad <= this.dinero) {
-            this.dinero -= cantidad;
-            usuarioEncontrado.dinero += cantidad;
+    enviarDinero(usuarioDestino, cantidad, usuariosRegistrados) {
+        let estado = false;
+        let usuarioEncontrado = usuariosRegistrados.find(u => u.usuario === usuarioDestino);
+        if (usuarioEncontrado && parseInt(cantidad) <= this.dinero) {
+            this.dinero -= parseInt(cantidad);
+            usuarioEncontrado.dinero += parseInt(cantidad);
             estado = true;
         } else {
             estado = false;
@@ -34,7 +34,7 @@ class Usuarios {
 
 let usuarios = [];
 
-let usuarioPrueba = new Usuarios("Admin", "Admin");
+let usuarioPrueba = new Usuarios("admin", "admin");
 usuarios.push(usuarioPrueba);
 
 function registrar(usuario, contrasena) {
@@ -154,20 +154,42 @@ botonCerrarSesion.addEventListener("click", () => {
     document.getElementById("contrasenaInput").value = "";
 });
 
-document.getElementById('botonIngresarDinero').addEventListener('click', function() {
+document.getElementById('botonIngresarDinero').addEventListener('click', function () {
     const usuario = document.getElementById("usuarioInput").value;
     let usuarioIngresado = obtener(usuario);
     let dineroIngresado = document.getElementById('dineroModificar').value;
     usuarioIngresado.ingresarDinero(dineroIngresado);
     const dineroUsuario = document.getElementById("dinero");
     dineroUsuario.textContent = `$${usuarioIngresado.dinero}`;
-  });
+});
 
-  document.getElementById('botonRetirarDinero').addEventListener('click', function() {
+document.getElementById('botonRetirarDinero').addEventListener('click', function () {
     const usuario = document.getElementById("usuarioInput").value;
     let usuarioIngresado = obtener(usuario);
     let dineroIngresado = document.getElementById('dineroModificar').value;
     usuarioIngresado.retirarDinero(dineroIngresado);
     const dineroUsuario = document.getElementById("dinero");
     dineroUsuario.textContent = `$${usuarioIngresado.dinero}`;
-  });
+});
+
+document.getElementById('botonEnviarDinero').addEventListener('click', function () {
+    const usuario = document.getElementById("usuarioInput").value;
+    const usuarioIngresado = obtener(usuario);
+    const usuarioDestino = document.getElementById("destinatarioDinero").value;
+    const cantidad = parseInt(document.getElementById('dineroModificar').value);
+
+    if (usuarioIngresado && usuarioDestino && cantidad > 0 && !isNaN(cantidad) && cantidad <= usuarioIngresado.dinero) {
+        if (usuarioIngresado.enviarDinero(usuarioDestino, cantidad, usuarios)) {
+            console.log("Transferencia exitosa");
+            document.getElementById("dinero").textContent = `$${usuarioIngresado.dinero}`;
+            document.getElementById("dineroModificar").value = "";
+            document.getElementById("destinatarioDinero").value = "";
+        } else {
+            console.log("Error al enviar dinero");
+        }
+    } else {
+        console.log("No se puede realizar la transferencia.");
+    }
+    console.log(usuarios)
+});
+
