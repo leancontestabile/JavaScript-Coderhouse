@@ -1,0 +1,12 @@
+[
+  {
+    "usuario": "admin",
+    "contrasena": "admin",
+    "dinero": 1000
+  },
+  {
+    "usuario": "administrador",
+    "contrasena": "administrador",
+    "dinero": 500
+  }
+]

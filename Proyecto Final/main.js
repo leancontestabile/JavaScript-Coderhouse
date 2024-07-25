@@ -117,7 +117,13 @@ loginForm.addEventListener('submit', function (event) {
             throw new Error("Usuario y/o contraseña incorrectos");
         }
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        Swal.fire({
+            title: `Error: ${error.message}`,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            background: "rgb(33, 37, 41)",
+            color: "aliceblue"
+          });
     }
 });
 
@@ -131,12 +137,24 @@ registroForm.addEventListener("submit", function (event) {
             registroForm.classList.add("d-none");
             h2InicioSesion.textContent = "Iniciar Sesión";
             loginForm.style.display = "block";
-            alert("Registro exitoso");
+            Swal.fire({
+                title: "Registro exitoso",
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                background: "rgb(33, 37, 41)",
+                color: "aliceblue",
+              });
         } else {
             throw new Error("Registro inválido, ingrese otro nombre de usuario");
         }
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        Swal.fire({
+            title: `Error: ${error.message}`,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            background: "rgb(33, 37, 41)",
+            color: "aliceblue"
+          });
     }
 });
 
@@ -180,7 +198,13 @@ document.getElementById('botonRetirarDinero').addEventListener('click', function
             throw new Error("No se pudo retirar dinero");
         }
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        Swal.fire({
+            title: `Error: ${error.message}`,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            background: "rgb(33, 37, 41)",
+            color: "aliceblue"
+          });
     }
 });
 
@@ -192,10 +216,6 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
     const cantidad = parseInt(document.getElementById('dineroModificar').value);
 
     try {
-        if (!usuarioIngresado) {
-            throw new Error("Usuario no encontrado.");
-        }
-
         if (!usuarioDestino) {
             throw new Error("Destinatario no especificado.");
         }
@@ -208,10 +228,23 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
             document.getElementById("dinero").textContent = `$${usuarioIngresado.dinero}`;
             document.getElementById("dineroModificar").value = "";
             document.getElementById("destinatarioDinero").value = "";
+            Swal.fire({
+                title: "Envio exitoso",
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                background: "rgb(33, 37, 41)",
+                color: "aliceblue"
+              });
         } else {
             throw new Error("Error al enviar dinero.");
         }
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        Swal.fire({
+            title: `Error: ${error.message}`,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            background: "rgb(33, 37, 41)",
+            color: "aliceblue"
+          });
     }
 });
