@@ -1,8 +1,8 @@
 class Usuarios {
-    constructor(usuario, contrasena) {
+    constructor(usuario, contrasena, dinero) {
         this.usuario = usuario;
         this.contrasena = contrasena;
-        this.dinero = 0;
+        this.dinero = dinero;
     }
     ingresarDinero(ingreso) {
         this.dinero += parseInt(ingreso);
@@ -33,15 +33,23 @@ class Usuarios {
 
 let usuarios = [];
 
-let usuarioPrueba = new Usuarios("admin", "admin");
-usuarios.push(usuarioPrueba);
+const llamadoAPI = async (URL) => {
+    const res = await fetch(URL);
+    const data = await res.json();
+    data.forEach(element => {
+        let nuevoUsuario = new Usuarios(element.usuario, element.contrasena, element.dinero);
+        usuarios.push(nuevoUsuario);
+    });;
+}
+
+llamadoAPI("./usuarios.json");
 
 function registrar(usuario, contrasena) {
     let estado;
     if (buscar(usuario)) {
         estado = false;
     } else {
-        let nuevoUsuario = new Usuarios(usuario, contrasena);
+        let nuevoUsuario = new Usuarios(usuario, contrasena, 0);
         usuarios.push(nuevoUsuario);
         estado = true;
     }
@@ -90,6 +98,7 @@ botonDarkmode.addEventListener("click", () => {
     } else {
         localStorage.setItem("dark", "off");
     }
+    console.log(usuarios);
 });
 
 const h2InicioSesion = document.getElementById("inicioSesion");
@@ -123,7 +132,7 @@ loginForm.addEventListener('submit', function (event) {
             confirmButtonText: 'Ok',
             background: "rgb(33, 37, 41)",
             color: "aliceblue"
-          });
+        });
     }
 });
 
@@ -143,7 +152,7 @@ registroForm.addEventListener("submit", function (event) {
                 confirmButtonText: 'Ok',
                 background: "rgb(33, 37, 41)",
                 color: "aliceblue",
-              });
+            });
         } else {
             throw new Error("Registro inválido, ingrese otro nombre de usuario");
         }
@@ -154,7 +163,7 @@ registroForm.addEventListener("submit", function (event) {
             confirmButtonText: 'Ok',
             background: "rgb(33, 37, 41)",
             color: "aliceblue"
-          });
+        });
     }
 });
 
@@ -204,7 +213,7 @@ document.getElementById('botonRetirarDinero').addEventListener('click', function
             confirmButtonText: 'Ok',
             background: "rgb(33, 37, 41)",
             color: "aliceblue"
-          });
+        });
     }
 });
 
@@ -234,7 +243,7 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
                 confirmButtonText: 'Ok',
                 background: "rgb(33, 37, 41)",
                 color: "aliceblue"
-              });
+            });
         } else {
             throw new Error("Error al enviar dinero.");
         }
@@ -245,6 +254,6 @@ document.getElementById('botonEnviarDinero').addEventListener('click', function 
             confirmButtonText: 'Ok',
             background: "rgb(33, 37, 41)",
             color: "aliceblue"
-          });
+        });
     }
 });

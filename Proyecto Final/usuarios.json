@@ -1,12 +1,17 @@
 [
-  {
-    "usuario": "admin",
-    "contrasena": "admin",
-    "dinero": 1000
-  },
-  {
-    "usuario": "administrador",
-    "contrasena": "administrador",
-    "dinero": 500
-  }
+    {
+        "usuario": "admin",
+        "contrasena": "admin",
+        "dinero": 1000
+    },
+    {
+        "usuario": "lean",
+        "contrasena": "lean",
+        "dinero": 500
+    },
+    {
+        "usuario": "pedro",
+        "contrasena": "pedro",
+        "dinero": 250
+    }
 ]
