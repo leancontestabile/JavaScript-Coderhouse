@@ -98,7 +98,6 @@ botonDarkmode.addEventListener("click", () => {
     } else {
         localStorage.setItem("dark", "off");
     }
-    console.log(usuarios);
 });
 
 const h2InicioSesion = document.getElementById("inicioSesion");
